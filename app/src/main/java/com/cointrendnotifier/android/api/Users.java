@@ -153,7 +153,7 @@ public class Users {
 
         // execute request
         Request request = new Request.Builder()
-                .url(baseUrl)
+                .url(baseUrl + "/login")
                 .post(body)
                 .build();
         Response response = client.newCall(request).execute();
@@ -182,7 +182,7 @@ public class Users {
 
         // execute request
         Request request = new Request.Builder()
-                .url(baseUrl)
+                .url(baseUrl + "/password")
                 .addHeader("Authorization", "Bearer " + Api.getJwt())
                 .patch(body)
                 .build();
