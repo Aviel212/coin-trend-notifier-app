@@ -18,7 +18,7 @@ public class RegisteredUserDto extends UserDto {
         this._id = _id;
     }
 
-    public String getId() {
+    public String get_id() {
         return _id;
     }
 }
