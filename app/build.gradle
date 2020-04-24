@@ -33,4 +33,5 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
 
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.5.0'
+    implementation group: 'com.beardedhen', name: 'androidbootstrap', version: '2.3.2'
 }

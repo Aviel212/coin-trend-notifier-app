@@ -1,33 +1,31 @@
 package com.cointrendnotifier.android.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
-
 import com.cointrendnotifier.android.R;
-import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
-
 import org.json.JSONException;
-
 import java.io.IOException;
+
+import com.beardedhen.androidbootstrap.TypefaceProvider;
+import com.beardedhen.androidbootstrap.BootstrapButton;
+
 
 public class MainActivity extends AppCompatActivity {
     private EditText email_EditText, password_EditText;
-    private Button signin_Button;
+    private BootstrapButton signin_Button;
     private String email, password;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TypefaceProvider.registerDefaultIconSets();
         setContentView(R.layout.activity_main);
         email_EditText = (EditText) findViewById(R.id.email);
         email_EditText.addTextChangedListener(new TextWatcher() {
@@ -53,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
-        signin_Button = (Button) findViewById(R.id.signin);
+        signin_Button = (BootstrapButton) findViewById(R.id.signin);
         signin_Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
