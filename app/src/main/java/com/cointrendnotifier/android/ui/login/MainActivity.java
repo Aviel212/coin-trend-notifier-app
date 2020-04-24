@@ -1,13 +1,18 @@
 package com.cointrendnotifier.android.ui.login;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
+
+import com.beardedhen.androidbootstrap.BootstrapText;
 import com.cointrendnotifier.android.R;
+import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
 import org.json.JSONException;
@@ -15,20 +20,26 @@ import java.io.IOException;
 
 import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.beardedhen.androidbootstrap.BootstrapButton;
-
+import com.beardedhen.androidbootstrap.BootstrapEditText;
+import com.beardedhen.androidbootstrap.AwesomeTextView;
 
 public class MainActivity extends AppCompatActivity {
-    private EditText email_EditText, password_EditText;
-    private BootstrapButton signin_Button;
+    private BootstrapEditText emailEditText, passwordEditText;
+    private BootstrapButton signinButton, signupButton;
+    private AwesomeTextView errorTextView;
     private String email, password;
+    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TypefaceProvider.registerDefaultIconSets();
         setContentView(R.layout.activity_main);
-        email_EditText = (EditText) findViewById(R.id.email);
-        email_EditText.addTextChangedListener(new TextWatcher() {
+
+        context = getApplicationContext();
+
+        emailEditText = (BootstrapEditText) findViewById(R.id.email);
+        emailEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 email = s.toString();
             }
@@ -39,8 +50,9 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
-        password_EditText = (EditText) findViewById(R.id.password);
-        password_EditText.addTextChangedListener(new TextWatcher() {
+
+        passwordEditText = (BootstrapEditText) findViewById(R.id.password);
+        passwordEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 password = s.toString();
             }
@@ -51,22 +63,30 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
             }
         });
-        signin_Button = (BootstrapButton) findViewById(R.id.signin);
-        signin_Button.setOnClickListener(new View.OnClickListener() {
+
+        signupButton = (BootstrapButton) findViewById(R.id.signup);
+        signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                try {
-                    signin_Button.setEnabled(false);
-                    login(email, password);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                    signin_Button.setEnabled(true);
-                }
+                Intent i = new Intent(MainActivity.this, SignupActivity.class);
+                MainActivity.this.startActivity(i);
             }
         });
+
+        signinButton = (BootstrapButton) findViewById(R.id.signin);
+        signinButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                signinButton.setEnabled(false);
+                signupButton.setEnabled(false);
+                login(email, password, context);
+            }
+        });
+
+        errorTextView = (AwesomeTextView) findViewById(R.id.login_error);
     }
 
-    public void login(final String email, final String password) throws InterruptedException {
+    public void login(final String email, final String password, final Context context) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -83,6 +103,18 @@ public class MainActivity extends AppCompatActivity {
                     e.printStackTrace();
                 } catch (IOException e) {
                     e.printStackTrace();
+
+                } catch (UnsuccessfulHttpRequestException e) {
+                    e.printStackTrace();
+
+                    //ERROR - NOT WORKING FOLLOWING CODE
+                    errorTextView.setBootstrapText(new BootstrapText.Builder(
+                            errorTextView.getContext())
+                            .addText((CharSequence) e.getMessage())
+                            .build());
+
+                    signinButton.setEnabled(true);
+                    signupButton.setEnabled(true);
                 }
 
             }

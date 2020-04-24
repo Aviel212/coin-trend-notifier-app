@@ -20,7 +20,7 @@
         app:roundedCorners="true"
         app:showOutline="false" />
 
-    <EditText
+    <com.beardedhen.androidbootstrap.BootstrapEditText
         android:id="@+id/email"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -32,9 +32,11 @@
         android:ems="10"
         android:hint="@string/login_email_hint"
         android:inputType="textPersonName"
+        app:bootstrapSize="lg"
+        app:roundedCorners="true"
         tools:ignore="TextFields" />
 
-    <EditText
+    <com.beardedhen.androidbootstrap.BootstrapEditText
         android:id="@+id/password"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,7 +46,9 @@
         android:layout_marginTop="10dp"
         android:ems="10"
         android:hint="@string/login_password_hint"
-        android:inputType="textPassword" />
+        android:inputType="textPassword"
+        app:bootstrapSize="lg"
+        app:roundedCorners="true" />
 
     <com.beardedhen.androidbootstrap.AwesomeTextView
         android:id="@+id/welcome"
@@ -59,4 +63,31 @@
         app:bootstrapBrand="success"
         app:bootstrapText="Welcome" />
 
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/signup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signin"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="25dp"
+        android:text="@string/login_signup_text"
+        app:bootstrapBrand="primary"
+        app:bootstrapSize="lg"
+        app:buttonMode="regular"
+        app:roundedCorners="true"
+        app:showOutline="true" />
+
+    <com.beardedhen.androidbootstrap.AwesomeTextView
+        android:id="@+id/login_error"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/signup"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="50dp"
+        android:fontFamily="sans-serif-smallcaps"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:bootstrapBrand="danger"
+        app:bootstrapText=" "
+        app:fontAwesomeIcon="fa_android" />
 </RelativeLayout>
