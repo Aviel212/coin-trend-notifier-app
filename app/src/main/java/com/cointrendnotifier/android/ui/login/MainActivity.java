@@ -58,9 +58,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    signin_Button.setEnabled(false);
                     login(email, password);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
+                    signin_Button.setEnabled(true);
                 }
             }
         });
@@ -72,19 +74,23 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Users.login(email, password);
-                } catch (UnsuccessfulHttpRequestException e) {
-                    // user not found or wrong details exceptions
-                    e.getResponse();
-                } catch (Exception e) {
-                    // other exceptions
-                    Log.println(Log.DEBUG, "someLog", e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Intent i = new Intent(MainActivity.this, TrendsActivity.class);
+                            MainActivity.this.startActivity(i);
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
                 }
+
             }
         });
         thread.start();
-        thread.join();
-        Intent i = new Intent(MainActivity.this, TrendsActivity.class);
-        MainActivity.this.startActivity(i);
+
     }
 
 }
