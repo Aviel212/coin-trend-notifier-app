@@ -1,27 +1,28 @@
 package com.cointrendnotifier.android.ui.login;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
-import android.widget.EditText;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.beardedhen.androidbootstrap.AwesomeTextView;
+import com.beardedhen.androidbootstrap.BootstrapButton;
+import com.beardedhen.androidbootstrap.BootstrapEditText;
 import com.beardedhen.androidbootstrap.BootstrapText;
+import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
-import org.json.JSONException;
-import java.io.IOException;
 
-import com.beardedhen.androidbootstrap.TypefaceProvider;
-import com.beardedhen.androidbootstrap.BootstrapButton;
-import com.beardedhen.androidbootstrap.BootstrapEditText;
-import com.beardedhen.androidbootstrap.AwesomeTextView;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
     private BootstrapEditText emailEditText, passwordEditText;
@@ -86,6 +87,34 @@ public class MainActivity extends AppCompatActivity {
         errorTextView = (AwesomeTextView) findViewById(R.id.login_error);
     }
 
+    protected void printStringError(final String e) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                errorTextView.setBootstrapText(new BootstrapText.Builder(
+                        errorTextView.getContext())
+                        .addText(e)
+                        .build());
+                signinButton.setEnabled(true);
+                signupButton.setEnabled(true);
+            }
+        });
+    }
+
+    protected void printExceptionError(final Exception e) {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                errorTextView.setBootstrapText(new BootstrapText.Builder(
+                        errorTextView.getContext())
+                        .addText(e.getMessage())
+                        .build());
+                signinButton.setEnabled(true);
+                signupButton.setEnabled(true);
+            }
+        });
+    }
+
     public void login(final String email, final String password, final Context context) {
         Thread thread = new Thread(new Runnable() {
             @Override
@@ -101,26 +130,22 @@ public class MainActivity extends AppCompatActivity {
                     });
                 } catch (JSONException e) {
                     e.printStackTrace();
+                    printExceptionError(e);
                 } catch (IOException e) {
                     e.printStackTrace();
-
+                    printExceptionError(e);
                 } catch (UnsuccessfulHttpRequestException e) {
                     e.printStackTrace();
-
-                    //ERROR - NOT WORKING FOLLOWING CODE
-                    errorTextView.setBootstrapText(new BootstrapText.Builder(
-                            errorTextView.getContext())
-                            .addText((CharSequence) e.getMessage())
-                            .build());
-
-                    signinButton.setEnabled(true);
-                    signupButton.setEnabled(true);
+                    try {
+                        JSONObject responseBody = new JSONObject(e.getResponse().body().string());
+                        printStringError(responseBody.getString("error"));
+                    } catch (IOException | JSONException ex) {
+                        ex.printStackTrace();
+                        printExceptionError(ex);
+                    }
                 }
-
             }
         });
         thread.start();
-
     }
-
 }
