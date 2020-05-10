@@ -44,7 +44,7 @@ public class Events {
                     current.getString("baseAssetName"),
                     current.getString("quoteAssetName"),
                     current.getDouble("probability"),
-                    current.getInt("firedAt"),
+                    current.getLong("firedAt"),
                     current.getString("_id")));
         }
 
@@ -74,7 +74,7 @@ public class Events {
                 responseBody.getString("baseAssetName"),
                 responseBody.getString("quoteAssetName"),
                 responseBody.getDouble("probability"),
-                responseBody.getInt("firedAt"),
+                responseBody.getLong("firedAt"),
                 responseBody.getString("_id"));
 
         // return result
