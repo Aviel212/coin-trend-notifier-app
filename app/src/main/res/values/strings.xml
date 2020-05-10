@@ -5,13 +5,6 @@
     <string name="login_password_hint">**********</string>
     <string name="login_welcome_text">Welcome</string>
     <string name="login_signup_text">Sign up</string>
-    <string name="about_content">Hey, we\'re Yarden, Aviel and Alaa.\n
-    We made this app to help you in your cryptocurrency investments!\n
-    Have fun getting predictions for upcoming trends.\n
-    Here are a few links:\n
-    \tSource code for the app: https://github.com/Aviel212/coin-trend-notifier-app \n
-    \tSource code for the backend: https://github.com/yardenshoham/coin-trend-notifier \n
-    \tSource code for the website: https://github.com/yardenshoham/coin-trend-notifier-website \n
-    🤑</string>
-    <string name="about">About</string>
+    <string name="about_content">Hey, we\'re Yarden, Aviel and Alaa.\n\nWe made this app to help you in your cryptocurrency investments!\n\nHave fun getting predictions for upcoming trends.\n\nHere are a few links:\n• <a href="https://github.com/Aviel212/coin-trend-notifier-app">Source code for the app</a>\n• <a href="https://github.com/yardenshoham/coin-trend-notifier">Source code for the backend</a>\n• <a href="https://github.com/yardenshoham/coin-trend-notifier-website">Source code for the website</a>\n🤑</string>
+    <string name="about">About us</string>
 </resources>
