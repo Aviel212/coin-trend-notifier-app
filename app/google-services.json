@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "856385969171",
+    "firebase_url": "https://coin-trend-notifier.firebaseio.com",
+    "project_id": "coin-trend-notifier",
+    "storage_bucket": "coin-trend-notifier.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:856385969171:android:0139cc575a1850f73af3e6",
+        "android_client_info": {
+          "package_name": "com.cointrendnotifier.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "856385969171-6n8ll7oruo37gb1hfiot04kbavqs0trg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBZoAoiH9Fikxjyg6cCD4vfS0JpPfOvXc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "856385969171-6n8ll7oruo37gb1hfiot04kbavqs0trg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

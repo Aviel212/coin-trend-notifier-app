@@ -7,6 +7,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
@@ -18,6 +19,10 @@ import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -121,6 +126,7 @@ public class MainActivity extends AppCompatActivity {
             public void run() {
                 try {
                     Users.login(email, password);
+                    sendToken();
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -147,5 +153,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         thread.start();
+    }
+
+    public void sendToken() {
+        FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(new OnCompleteListener<InstanceIdResult>() {
+            @Override
+            public void onComplete(@NonNull Task<InstanceIdResult> task) {
+                final String token = task.getResult().getToken();
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        try {
+                            Users.setFirebaseInstanceIdToken(token);
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
+            }
+        });
     }
 }
