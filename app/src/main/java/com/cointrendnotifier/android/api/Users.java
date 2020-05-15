@@ -166,6 +166,27 @@ public class Users {
         Api.setJwt(responseBody.getString("jwt"));
     }
 
+    public static void setFirebaseInstanceIdToken(String token) throws JSONException, IOException {
+        // create client
+        OkHttpClient client = new OkHttpClient();
+
+        // set body
+        final JSONObject bodyJson = new JSONObject();
+        bodyJson.put("token", token);
+        RequestBody body = RequestBody.create(bodyJson.toString(), Api.JSON);
+
+        // execute request
+        Request request = new Request.Builder()
+                .url(baseUrl + "/firebase")
+                .addHeader("Authorization", "Bearer " + Api.getJwt())
+                .patch(body)
+                .build();
+        Response response = client.newCall(request).execute();
+
+        // make sure the response is successful
+        if (!response.isSuccessful()) throw new UnsuccessfulHttpRequestException(response);
+    }
+
     public static void logout() {
         Api.setJwt(null);
     }
