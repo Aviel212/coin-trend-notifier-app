@@ -27,6 +27,7 @@ public class Preferences {
         final JSONObject bodyJson = new JSONObject();
         bodyJson.put("baseAssetName", baseAssetName);
         bodyJson.put("quoteAssetName", quoteAssetName);
+        bodyJson.put("probability", probability);
         RequestBody body = RequestBody.create(bodyJson.toString(), Api.JSON);
 
         // execute request
