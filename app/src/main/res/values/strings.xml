@@ -7,4 +7,25 @@
     <string name="login_signup_text">Sign up</string>
     <string name="about_content">Hey, we\'re Yarden, Aviel and Alaa.\n\nWe made this app to help you in your cryptocurrency investments!\n\nHave fun getting predictions for upcoming trends.\n\nHere are a few links:\n• <a href="https://github.com/Aviel212/coin-trend-notifier-app">Source code for the app</a>\n• <a href="https://github.com/yardenshoham/coin-trend-notifier">Source code for the backend</a>\n• <a href="https://github.com/yardenshoham/coin-trend-notifier-website">Source code for the website</a>\n🤑</string>
     <string name="about">About us</string>
+    <string name="passowrd_change">Passowrd Change</string>
+    <string name="apply">Apply</string>
+    <string name="confirm_new_password">confirm new Password:</string>
+    <string name="new_password">new Password:</string>
+    <string name="old_password">old Password:</string>
+    <string name="account_settings">Account Settings</string>
+    <string name="back_to_settings">Back To Settings</string>
+    <string name="enter_old_password">Enter Old Password</string>
+    <string name="change_password">Change Password</string>
+    <string name="enter_new_password_again">Enter New Password Again</string>
+    <string name="new_password1">New Password</string>
+    <string name="enter_new_password">Enter New Password</string>
+    <string name="old_password1">Old Password</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="change_password1">Change Password</string>
+    <string name="_0">0</string>
+    <string name="alert_limit">Alert Limit</string>
+    <string name="username">Username</string>
+    <string name="email">Email</string>
+    <string name="reset">Reset</string>
+    <string name="update">Update</string>
 </resources>

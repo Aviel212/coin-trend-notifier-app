@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
 
         context = getApplicationContext();
 
-        emailEditText = (BootstrapEditText) findViewById(R.id.email);
+        emailEditText = (BootstrapEditText) findViewById(R.id.oldPassword);
         emailEditText.addTextChangedListener(new TextWatcher() {
             public void afterTextChanged(Editable s) {
                 email = s.toString();
