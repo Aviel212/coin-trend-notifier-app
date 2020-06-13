@@ -92,6 +92,8 @@
             app:bootstrapSize="lg"
             app:buttonMode="regular"
             app:roundedCorners="true"
+            android:layout_marginLeft="90sp"
+            android:layout_marginTop="40sp"
             app:showOutline="true" />
 
         <com.beardedhen.androidbootstrap.BootstrapButton
@@ -104,6 +106,8 @@
             app:bootstrapSize="lg"
             app:buttonMode="regular"
             app:roundedCorners="true"
+            android:layout_marginLeft="127sp"
+            android:layout_marginTop="40sp"
             app:showOutline="false" />
 
         <com.beardedhen.androidbootstrap.BootstrapButton
@@ -116,18 +120,22 @@
             app:bootstrapSize="lg"
             app:buttonMode="regular"
             app:roundedCorners="true"
+            android:layout_marginLeft="145sp"
+            android:layout_marginTop="40sp"
             app:showOutline="true" />
 
         <com.beardedhen.androidbootstrap.AwesomeTextView
             android:id="@+id/settingsError"
             android:layout_width="76dp"
-            android:layout_height="0dp"
+            android:layout_height="45dp"
             android:fontFamily="sans-serif-smallcaps"
             android:textSize="16sp"
             android:textStyle="bold"
             app:bootstrapBrand="danger"
             app:bootstrapText=" "
             app:fontAwesomeIcon="fa_android"
+            android:layout_marginLeft="145sp"
+            android:layout_marginTop="60sp"
             app:layout_constraintBottom_toBottomOf="parent" />
     </LinearLayout>
 

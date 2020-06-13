@@ -41,14 +41,16 @@ public class PasswordActivity extends AppCompatActivity {
                         String confirmedPassword = edit3.getText().toString();
                         if (confirmedPassword == newPassword && newPassword != "" && oldPassword != "")
                             password_change(oldPassword, newPassword);
-                        else if (oldPassword == "")
-                            printStringError("Old Password Not Inserted");
-                        if (newPassword == "")
-                            printStringError("New Password Not Inserted");
-                        if (confirmedPassword == "")
-                            printStringError("Confirmed Password Not Inserted");
-                        if (confirmedPassword == newPassword)
-                            printStringError("Passwords Is Not The Same");
+                        else {
+                            if (oldPassword == "")
+                                printStringError("Old Password Not Inserted");
+                            if (newPassword == "")
+                                printStringError("New Password Not Inserted");
+                            if (confirmedPassword == "")
+                                printStringError("Confirmed Password Not Inserted");
+                            if (confirmedPassword == newPassword)
+                                printStringError("Passwords Is Not The Same");
+                        }
                     }
                 });
 

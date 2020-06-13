@@ -69,9 +69,12 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 (new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        findViewById(R.id.email).setContentDescription("example@domain.com");
-                        findViewById(R.id.Username).setContentDescription("");
-                        findViewById(R.id.AlertLimit).setContentDescription("0");
+                        EditText edit1 = (EditText) findViewById(R.id.email);
+                        EditText edit2 = (EditText) findViewById(R.id.Username);
+                        EditText edit3 = (EditText) findViewById(R.id.AlertLimit);
+                        edit1.setText("");
+                        edit2.setText("");
+                        edit3.setText("0");
                     }
                 });
     }
