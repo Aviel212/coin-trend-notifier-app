@@ -1,5 +1,5 @@
 
-package com.cointrendnotifier.android.ui.Password;
+package com.cointrendnotifier.android.ui.accountsettings;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,56 +13,65 @@ import com.beardedhen.androidbootstrap.BootstrapText;
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
-import com.cointrendnotifier.android.ui.AccountSettings.AccountSettingsActivity;
+import com.cointrendnotifier.android.ui.password.PasswordActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class PasswordActivity extends AppCompatActivity {
+public class AccountSettingsActivity extends AppCompatActivity {
     private AwesomeTextView errorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_password);
-        errorTextView = (AwesomeTextView) findViewById(R.id.passwordError);
-        findViewById(R.id.changePasswordBtn).setOnClickListener
+        setContentView(R.layout.activity_account_settings);
+        errorTextView = (AwesomeTextView) findViewById(R.id.settingsError);
+        findViewById(R.id.updateBtn).setOnClickListener
                 (new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        findViewById(R.id.changePasswordBtn).setEnabled(false);
-                        EditText edit1 = (EditText) findViewById(R.id.oldPassword);
-                        EditText edit2 = (EditText) findViewById(R.id.newPassword);
-                        EditText edit3 = (EditText) findViewById(R.id.confirmedPassword);
-                        String oldPassword = edit1.getText().toString();
-                        String newPassword = edit2.getText().toString();
-                        String confirmedPassword = edit3.getText().toString();
-                        if (confirmedPassword == newPassword && newPassword != "" && oldPassword != "")
-                            password_change(oldPassword, newPassword);
-                        else if (oldPassword == "")
-                            printStringError("Old Password Not Inserted");
-                        if (newPassword == "")
-                            printStringError("New Password Not Inserted");
-                        if (confirmedPassword == "")
-                            printStringError("Confirmed Password Not Inserted");
-                        if (confirmedPassword == newPassword)
-                            printStringError("Passwords Is Not The Same");
+                        findViewById(R.id.updateBtn).setEnabled(false);
+                        EditText edit1 = (EditText) findViewById(R.id.email);
+                        EditText edit2 = (EditText) findViewById(R.id.Username);
+                        EditText edit3 = (EditText) findViewById(R.id.AlertLimit);
+                        String email = edit1.getText().toString();
+                        String Username = edit2.getText().toString();
+                        int alertLimit = Integer.parseInt(edit3.getText().toString());
+                        if (email != "" && Username != "" && alertLimit >= 0)
+                            Account_Settings_Change(email, Username, alertLimit);
+                        else {
+                            if (email == "")
+                                printStringError("Email Should be Inserted");
+                            if (Username == "")
+                                printStringError("Username Should be Inserted");
+                            if (alertLimit < 0)
+                                printStringError("Invalid Alert Limit");
+                        }
                     }
                 });
 
-        findViewById(R.id.BackToSettingsBtn).setOnClickListener
+        findViewById(R.id.BackToPasswordBtn).setOnClickListener
                 (new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Intent i = new Intent(PasswordActivity.this, AccountSettingsActivity.class);
-                                PasswordActivity.this.startActivity(i);
+                                Intent i = new Intent(AccountSettingsActivity.this, PasswordActivity.class);
+                                AccountSettingsActivity.this.startActivity(i);
                             }
                         });
+                    }
+                });
+        findViewById(R.id.resetBtn).setOnClickListener
+                (new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        findViewById(R.id.email).setContentDescription("example@domain.com");
+                        findViewById(R.id.Username).setContentDescription("");
+                        findViewById(R.id.AlertLimit).setContentDescription("0");
                     }
                 });
     }
@@ -91,13 +100,12 @@ public class PasswordActivity extends AppCompatActivity {
         });
     }
 
-    public void password_change(final String oldPassword, final String newPassword) {
+    public void Account_Settings_Change(final String email, final String Username, final int alertLimit) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Users.changePassword(oldPassword, newPassword);
-
+                    Users.updateUser(email, Username, alertLimit);
                 } catch (JSONException e) {
                     e.printStackTrace();
                     printExceptionError(e);
@@ -117,7 +125,7 @@ public class PasswordActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        findViewById(R.id.changePasswordBtn).setEnabled(true);
+                        findViewById(R.id.updateBtn).setEnabled(true);
                     }
                 });
             }
@@ -125,4 +133,3 @@ public class PasswordActivity extends AppCompatActivity {
         thread.start();
     }
 }
-

@@ -1,5 +1,5 @@
 
-package com.cointrendnotifier.android.ui.AccountSettings;
+package com.cointrendnotifier.android.ui.password;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,65 +13,56 @@ import com.beardedhen.androidbootstrap.BootstrapText;
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
-import com.cointrendnotifier.android.ui.Password.PasswordActivity;
+import com.cointrendnotifier.android.ui.accountsettings.AccountSettingsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class AccountSettingsActivity extends AppCompatActivity {
+public class PasswordActivity extends AppCompatActivity {
     private AwesomeTextView errorTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_settings);
-        errorTextView = (AwesomeTextView) findViewById(R.id.settingsError);
-        findViewById(R.id.updateBtn).setOnClickListener
+        setContentView(R.layout.activity_password);
+        errorTextView = (AwesomeTextView) findViewById(R.id.passwordError);
+        findViewById(R.id.changePasswordBtn).setOnClickListener
                 (new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        findViewById(R.id.updateBtn).setEnabled(false);
-                        EditText edit1 = (EditText) findViewById(R.id.email);
-                        EditText edit2 = (EditText) findViewById(R.id.Username);
-                        EditText edit3 = (EditText) findViewById(R.id.AlertLimit);
-                        String email = edit1.getText().toString();
-                        String Username = edit2.getText().toString();
-                        int alertLimit = Integer.parseInt(edit3.getText().toString());
-                        if (email != "" && Username != "" && alertLimit >= 0)
-                            Account_Settings_Change(email, Username, alertLimit);
-                        else {
-                            if (email == "")
-                                printStringError("Email Should be Inserted");
-                            if (Username == "")
-                                printStringError("Username Should be Inserted");
-                            if (alertLimit < 0)
-                                printStringError("Invalid Alert Limit");
-                        }
+                        findViewById(R.id.changePasswordBtn).setEnabled(false);
+                        EditText edit1 = (EditText) findViewById(R.id.oldPassword);
+                        EditText edit2 = (EditText) findViewById(R.id.newPassword);
+                        EditText edit3 = (EditText) findViewById(R.id.confirmedPassword);
+                        String oldPassword = edit1.getText().toString();
+                        String newPassword = edit2.getText().toString();
+                        String confirmedPassword = edit3.getText().toString();
+                        if (confirmedPassword == newPassword && newPassword != "" && oldPassword != "")
+                            password_change(oldPassword, newPassword);
+                        else if (oldPassword == "")
+                            printStringError("Old Password Not Inserted");
+                        if (newPassword == "")
+                            printStringError("New Password Not Inserted");
+                        if (confirmedPassword == "")
+                            printStringError("Confirmed Password Not Inserted");
+                        if (confirmedPassword == newPassword)
+                            printStringError("Passwords Is Not The Same");
                     }
                 });
 
-        findViewById(R.id.BackToPasswordBtn).setOnClickListener
+        findViewById(R.id.BackToSettingsBtn).setOnClickListener
                 (new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                Intent i = new Intent(AccountSettingsActivity.this, PasswordActivity.class);
-                                AccountSettingsActivity.this.startActivity(i);
+                                Intent i = new Intent(PasswordActivity.this, AccountSettingsActivity.class);
+                                PasswordActivity.this.startActivity(i);
                             }
                         });
-                    }
-                });
-        findViewById(R.id.resetBtn).setOnClickListener
-                (new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        findViewById(R.id.email).setContentDescription("example@domain.com");
-                        findViewById(R.id.Username).setContentDescription("");
-                        findViewById(R.id.AlertLimit).setContentDescription("0");
                     }
                 });
     }
@@ -100,12 +91,13 @@ public class AccountSettingsActivity extends AppCompatActivity {
         });
     }
 
-    public void Account_Settings_Change(final String email, final String Username, final int alertLimit) {
+    public void password_change(final String oldPassword, final String newPassword) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
-                    Users.updateUser(email, Username, alertLimit);
+                    Users.changePassword(oldPassword, newPassword);
+
                 } catch (JSONException e) {
                     e.printStackTrace();
                     printExceptionError(e);
@@ -125,7 +117,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        findViewById(R.id.updateBtn).setEnabled(true);
+                        findViewById(R.id.changePasswordBtn).setEnabled(true);
                     }
                 });
             }
@@ -133,3 +125,4 @@ public class AccountSettingsActivity extends AppCompatActivity {
         thread.start();
     }
 }
+

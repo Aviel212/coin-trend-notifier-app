@@ -11,8 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.AccountSettings.AccountSettingsActivity"></activity>
-        <activity android:name=".ui.Password.PasswordActivity" />
+        <activity android:name=".ui.accountsettings.AccountSettingsActivity"></activity>
+        <activity android:name=".ui.password.PasswordActivity" />
         <activity android:name=".ui.trend.TrendActivity" />
         <activity android:name=".ui.login.SignupActivity" />
         <activity android:name=".ui.about.AboutActivity" />
