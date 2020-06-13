@@ -1,4 +1,5 @@
 <resources>
+    <string name="preferences_content">Hi \nIn this page you can edit your preferred coins. \nYou will get notifications on the crypto coins that are shown here.</string>
     <string name="app_name">Coin Trend Notifier</string>
     <string name="login_button_text">Sign in</string>
     <string name="login_email_hint">example@domain.com</string>

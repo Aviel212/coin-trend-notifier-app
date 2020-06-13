@@ -18,7 +18,7 @@ import com.beardedhen.androidbootstrap.TypefaceProvider;
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
-import com.cointrendnotifier.android.ui.password.PasswordActivity;
+import com.cointrendnotifier.android.ui.trends.TrendsActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.iid.FirebaseInstanceId;
@@ -130,7 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Intent i = new Intent(MainActivity.this, PasswordActivity.class);
+                            Intent i = new Intent(MainActivity.this, TrendsActivity.class);
                             MainActivity.this.startActivity(i);
                         }
                     });
