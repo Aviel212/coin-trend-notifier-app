@@ -5,7 +5,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -40,14 +39,12 @@ public class AccountSettingsActivity extends AppCompatActivity {
                         String email = edit1.getText().toString();
                         String Username = edit2.getText().toString();
                         int alertLimit = Integer.parseInt(edit3.getText().toString());
-                        Toast.makeText(AccountSettingsActivity.this, email, Toast.LENGTH_LONG).show();
-
-                        if (email != "" && Username != "" && alertLimit >= 0)
+                        if (!email.equals("") && !Username.equals("") && alertLimit >= 0)
                             Account_Settings_Change(email, Username, alertLimit);
                         else {
-                            if (email == "")
+                            if (email.equals(""))
                                 printStringError("Email Should be Insert");
-                            if (Username == "")
+                            if (Username.equals(""))
                                 printStringError("Username Should be Insert");
                             if (alertLimit < 0)
                                 printStringError("Invalid Alert Limit");

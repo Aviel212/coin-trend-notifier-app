@@ -2,10 +2,13 @@
 package com.cointrendnotifier.android.ui.password;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
@@ -30,6 +33,7 @@ public class PasswordActivity extends AppCompatActivity {
         errorTextView = (AwesomeTextView) findViewById(R.id.passwordError);
         findViewById(R.id.changePasswordBtn).setOnClickListener
                 (new View.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
                     @Override
                     public void onClick(View v) {
                         findViewById(R.id.changePasswordBtn).setEnabled(false);
@@ -39,17 +43,22 @@ public class PasswordActivity extends AppCompatActivity {
                         String oldPassword = edit1.getText().toString();
                         String newPassword = edit2.getText().toString();
                         String confirmedPassword = edit3.getText().toString();
-                        if (confirmedPassword == newPassword && newPassword != "" && oldPassword != "")
+
+
+                        if (confirmedPassword.equals(newPassword) && newPassword.length() >= 6 && !confirmedPassword.equals("") && !oldPassword.equals(""))
                             password_change(oldPassword, newPassword);
                         else {
-                            if (oldPassword == "")
-                                printStringError("Old Password Not Inserted");
-                            if (newPassword == "")
-                                printStringError("New Password Not Inserted");
-                            if (confirmedPassword == "")
-                                printStringError("Confirmed Password Not Inserted");
-                            if (confirmedPassword == newPassword)
-                                printStringError("Passwords Is Not The Same");
+                            if (oldPassword.equals(""))
+                                printStringError("Please insert old password");
+                            if (newPassword.equals(""))
+                                printStringError("Please insert new password");
+                            if (newPassword.length() < 6)
+                                printStringError("Password must be over 6 characters");
+                            if (confirmedPassword.equals(""))
+                                printStringError("Please insert confirmed password");
+                            if (!confirmedPassword.equals(newPassword))
+                                printStringError("Passwords is not the same");
+                            findViewById(R.id.changePasswordBtn).setEnabled(true);
                         }
                     }
                 });
@@ -94,6 +103,7 @@ public class PasswordActivity extends AppCompatActivity {
     }
 
     public void password_change(final String oldPassword, final String newPassword) {
+        Toast.makeText(PasswordActivity.this, "in the function", Toast.LENGTH_LONG).show();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
