@@ -24,9 +24,16 @@
     <string name="confirm_password">Confirm Password</string>
     <string name="change_password1">Change Password</string>
     <string name="_0">0</string>
+    <string name="forward_slash">/</string>
     <string name="alert_limit">Alert Limit</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="reset">Reset</string>
     <string name="update">Update</string>
+    <string-array name="coins_array">
+        <item>BTC</item>
+        <item>ETH</item>
+        <item>TRX</item>
+        <item>USDT</item>
+    </string-array>
 </resources>
