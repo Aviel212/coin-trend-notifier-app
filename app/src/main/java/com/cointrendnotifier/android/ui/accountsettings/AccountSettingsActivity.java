@@ -1,4 +1,3 @@
-
 package com.cointrendnotifier.android.ui.accountsettings;
 
 import android.content.Intent;
@@ -13,6 +12,7 @@ import com.beardedhen.androidbootstrap.BootstrapText;
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
+import com.cointrendnotifier.android.api.dtos.RegisteredUserDto;
 import com.cointrendnotifier.android.ui.password.PasswordActivity;
 
 import org.json.JSONException;
@@ -28,6 +28,10 @@ public class AccountSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
         errorTextView = (AwesomeTextView) findViewById(R.id.settingsError);
+        insert_user_info();
+
+
+
         findViewById(R.id.updateBtn).setOnClickListener
                 (new View.OnClickListener() {
                     @Override
@@ -39,7 +43,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                         String email = edit1.getText().toString();
                         String Username = edit2.getText().toString();
                         int alertLimit = Integer.parseInt(edit3.getText().toString());
-                        if (!email.equals("") && !Username.equals("") && alertLimit >= 0)
+                        if (!email.equals("") && !Username.equals("") && alertLimit >= 0 && !edit3.getText().toString().equals(""))
                             Account_Settings_Change(email, Username, alertLimit);
                         else {
                             if (email.equals(""))
@@ -70,12 +74,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 (new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        EditText edit1 = (EditText) findViewById(R.id.email);
-                        EditText edit2 = (EditText) findViewById(R.id.Username);
-                        EditText edit3 = (EditText) findViewById(R.id.AlertLimit);
-                        edit1.setText("");
-                        edit2.setText("");
-                        edit3.setText("0");
+                        insert_user_info();
                     }
                 });
     }
@@ -135,5 +134,45 @@ public class AccountSettingsActivity extends AppCompatActivity {
             }
         });
         thread.start();
+    }
+
+    public void insert_user_info() {
+        Thread thread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    final RegisteredUserDto userInfo = Users.getUser();
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            EditText edit1 = (EditText) findViewById(R.id.email);
+                            EditText edit2 = (EditText) findViewById(R.id.Username);
+                            EditText edit3 = (EditText) findViewById(R.id.AlertLimit);
+                            edit1.setText(userInfo.getEmail());
+                            edit2.setText(userInfo.getUsername());
+                            edit3.setText(Integer.toString(userInfo.getAlertLimit()));
+                        }
+                    });
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    printExceptionError(e);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    printExceptionError(e);
+                } catch (UnsuccessfulHttpRequestException e) {
+                    e.printStackTrace();
+                    try {
+                        JSONObject responseBody = new JSONObject(e.getResponse().body().string());
+                        printStringError(responseBody.getString("error"));
+                    } catch (IOException | JSONException ex) {
+                        ex.printStackTrace();
+                        printExceptionError(ex);
+                    }
+                }
+
+            }
+        });
+        thread.start();
+
     }
 }

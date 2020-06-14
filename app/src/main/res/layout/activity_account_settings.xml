@@ -70,17 +70,18 @@
             android:text="@string/alert_limit"
             android:textSize="25sp" />
 
+
         <com.beardedhen.androidbootstrap.BootstrapEditText
             android:id="@+id/AlertLimit"
             android:layout_width="267dp"
-            android:layout_height="wrap_content"
+            android:layout_height="43dp"
             android:ems="10"
-            android:hint="@string/_0"
-            android:inputType="textPersonName"
             android:text="@string/_0"
+            android:inputType="number"
             app:bootstrapSize="lg"
             app:roundedCorners="true"
             tools:ignore="TextFields" />
+
 
         <com.beardedhen.androidbootstrap.BootstrapButton
             android:id="@+id/BackToPasswordBtn"
@@ -137,6 +138,7 @@
             android:layout_marginLeft="120sp"
             android:layout_marginTop="60sp"
             app:layout_constraintBottom_toBottomOf="parent" />
+
     </LinearLayout>
 
 
