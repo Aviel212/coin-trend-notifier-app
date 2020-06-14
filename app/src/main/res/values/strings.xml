@@ -30,6 +30,7 @@
     <string name="email">Email</string>
     <string name="reset">Reset</string>
     <string name="update">Update</string>
+    <string name="todo">TODO</string>
     <string name="preferences">Preferences</string>
     <string name="add_preference">✚ ADD PREFERENCE</string>
     <string name="save_preference">SAVE</string>
