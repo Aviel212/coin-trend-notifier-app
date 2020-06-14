@@ -1,5 +1,6 @@
 package com.cointrendnotifier.android.ui.preferences;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -27,11 +28,19 @@ public class PreferencesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_preferences);
-//        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-//        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-//                R.array.coins_array, android.R.layout.simple_spinner_item);
-//        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-//        spinner.setAdapter(adapter);
+        BootstrapButton addPreference = (BootstrapButton) findViewById(R.id.add_preference);
+        addPreference.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(PreferencesActivity.this, AddPreferenceActivity.class);
+                PreferencesActivity.this.startActivity(i);
+            }
+        });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         render();
     }
 
