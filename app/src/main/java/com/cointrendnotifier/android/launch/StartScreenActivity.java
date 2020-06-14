@@ -1,4 +1,4 @@
-package com.cointrendnotifier.android.ui;
+package com.cointrendnotifier.android.launch;
 
 import android.content.Intent;
 import android.os.Bundle;

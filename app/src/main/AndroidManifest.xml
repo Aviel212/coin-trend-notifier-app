@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.StartScreenActivity">
+        <activity android:name=".launch.StartScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.preferences.PreferencesActivity" />
-        <activity android:name=".ui.preferences.AddPreferenceActivity"></activity>
+        <activity android:name=".ui.preferences.AddPreferenceActivity" />
         <activity android:name=".ui.accountsettings.AccountSettingsActivity" />
         <activity android:name=".ui.password.PasswordActivity" />
         <activity android:name=".ui.trend.TrendActivity" />
