@@ -8,7 +8,7 @@
     <string name="login_signup_text">Sign up</string>
     <string name="about_content">Hey, we\'re Yarden, Aviel and Alaa.\n\nWe made this app to help you in your cryptocurrency investments!\n\nHave fun getting predictions for upcoming trends.\n\nHere are a few links:\n• <a href="https://github.com/Aviel212/coin-trend-notifier-app">Source code for the app</a>\n• <a href="https://github.com/yardenshoham/coin-trend-notifier">Source code for the backend</a>\n• <a href="https://github.com/yardenshoham/coin-trend-notifier-website">Source code for the website</a>\n🤑</string>
     <string name="about">About us</string>
-    <string name="passowrd_change">Passowrd Change</string>
+    <string name="password_change">Password Change</string>
     <string name="apply">Apply</string>
     <string name="confirm_new_password">confirm new Password:</string>
     <string name="new_password">new Password:</string>
@@ -31,10 +31,27 @@
     <string name="reset">Reset</string>
     <string name="update">Update</string>
     <string name="todo">TODO</string>
+    <string name="preferences">Preferences</string>
+    <string name="add_preference">✚ ADD PREFERENCE</string>
+    <string name="save_preference">SAVE</string>
+    <string name="base_asset">Base asset</string>
+    <string name="quote_asset">Quote asset</string>
+    <string name="percentage">Probability</string>
     <string-array name="coins_array">
         <item>BTC</item>
         <item>ETH</item>
         <item>TRX</item>
         <item>USDT</item>
+    </string-array>
+    <string-array name="percentage_array">
+        <item>10%</item>
+        <item>20%</item>
+        <item>30%</item>
+        <item>40%</item>
+        <item>50%</item>
+        <item>60%</item>
+        <item>70%</item>
+        <item>80%</item>
+        <item>90%</item>
     </string-array>
 </resources>

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:gravity="center_horizontal"
     android:orientation="vertical"
     tools:context=".ui.preferences.PreferencesActivity">
 
@@ -12,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:text="Preferences"
+        android:text="@string/preferences"
         app:bootstrapHeading="h1" />
 
     <TextView
@@ -33,24 +34,14 @@
 
     </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
-
-        <!--        <Spinner-->
-        <!--            android:id="@+id/spinner"-->
-        <!--            android:layout_width="0dp"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_weight="1" />-->
-        <!--        <TextView-->
-        <!--            android:id="@+id/textView2"-->
-        <!--            android:layout_width="wrap_content"-->
-        <!--            android:layout_height="wrap_content"-->
-        <!--            android:layout_weight="1"-->
-        <!--            android:text="@string/forward_slash" />-->
-
-
-    </LinearLayout>
-
+    <com.beardedhen.androidbootstrap.BootstrapButton
+        android:id="@+id/add_preference"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:bootstrapBrand="primary"
+        app:bootstrapSize="lg"
+        app:bootstrapText="@string/add_preference"
+        app:buttonMode="regular"
+        app:showOutline="false" />
 
 </LinearLayout>
