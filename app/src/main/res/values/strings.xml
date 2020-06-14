@@ -30,6 +30,7 @@
     <string name="email">Email</string>
     <string name="reset">Reset</string>
     <string name="update">Update</string>
+    <string name="todo">TODO</string>
     <string-array name="coins_array">
         <item>BTC</item>
         <item>ETH</item>
