@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/about_from_menu"
+        android:title="@string/about_menu" />
+    <item
+        android:id="@+id/trends_from_menu"
+        android:title="@string/trends" />
+    <item
+        android:id="@+id/preferences_from_menu"
+        android:title="@string/preferences" />
+    <item
+        android:id="@+id/account_settings_from_menu"
+        android:title="@string/account_settings" />
+    <item
+        android:id="@+id/logout_from_menu"
+        android:title="@string/logout" />
+</menu>

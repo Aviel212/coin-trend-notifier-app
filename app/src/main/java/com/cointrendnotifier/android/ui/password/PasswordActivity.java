@@ -57,7 +57,7 @@ public class PasswordActivity extends AppCompatActivity {
                             if (confirmedPassword.equals(""))
                                 printStringError("Please insert confirmed password");
                             if (!confirmedPassword.equals(newPassword))
-                                printStringError("Passwords is not the same");
+                                printStringError("Passwords are not the same");
                             findViewById(R.id.changePasswordBtn).setEnabled(true);
                         }
                     }
@@ -103,13 +103,12 @@ public class PasswordActivity extends AppCompatActivity {
     }
 
     public void password_change(final String oldPassword, final String newPassword) {
-        Toast.makeText(PasswordActivity.this, "in the function", Toast.LENGTH_LONG).show();
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
                 try {
                     Users.changePassword(oldPassword, newPassword);
-
+                    Toast.makeText(PasswordActivity.this, "Password changed!", Toast.LENGTH_LONG).show();
                 } catch (JSONException e) {
                     e.printStackTrace();
                     printExceptionError(e);

@@ -2,6 +2,9 @@ package com.cointrendnotifier.android.ui.accountsettings;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -13,7 +16,11 @@ import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.api.dtos.RegisteredUserDto;
+import com.cointrendnotifier.android.ui.about.AboutActivity;
+import com.cointrendnotifier.android.ui.login.MainActivity;
 import com.cointrendnotifier.android.ui.password.PasswordActivity;
+import com.cointrendnotifier.android.ui.preferences.PreferencesActivity;
+import com.cointrendnotifier.android.ui.trends.TrendsActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,12 +31,40 @@ public class AccountSettingsActivity extends AppCompatActivity {
     private AwesomeTextView errorTextView;
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.actions_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // handle item selection
+        switch (item.getItemId()) {
+            case R.id.about_from_menu:
+                startActivity(new Intent(this, AboutActivity.class));
+                return true;
+            case R.id.preferences_from_menu:
+                startActivity(new Intent(this, PreferencesActivity.class));
+                return true;
+            case R.id.trends_from_menu:
+                startActivity(new Intent(this, TrendsActivity.class));
+                return true;
+            case R.id.logout_from_menu:
+                Users.logout();
+                startActivity(new Intent(this, MainActivity.class));
+                finish();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_settings);
         errorTextView = (AwesomeTextView) findViewById(R.id.settingsError);
         insert_user_info();
-
 
 
         findViewById(R.id.updateBtn).setOnClickListener

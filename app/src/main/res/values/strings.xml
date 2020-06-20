@@ -37,6 +37,9 @@
     <string name="base_asset">Base asset</string>
     <string name="quote_asset">Quote asset</string>
     <string name="percentage">Probability</string>
+    <string name="trends">Trends</string>
+    <string name="logout">Logout</string>
+    <string name="about_menu">About</string>
     <string-array name="coins_array">
         <item>BTC</item>
         <item>ETH</item>
