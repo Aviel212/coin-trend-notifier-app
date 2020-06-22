@@ -1,6 +1,5 @@
 package com.cointrendnotifier.android.ui.login;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -29,20 +28,17 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-public class MainActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private BootstrapEditText emailEditText, passwordEditText;
     private BootstrapButton signinButton, signupButton;
     private AwesomeTextView errorTextView;
     private String email, password;
-    private Context context;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         TypefaceProvider.registerDefaultIconSets();
-        setContentView(R.layout.activity_main);
-
-        context = getApplicationContext();
+        setContentView(R.layout.activity_login);
 
         emailEditText = (BootstrapEditText) findViewById(R.id.email);
         emailEditText.addTextChangedListener(new TextWatcher() {
@@ -74,8 +70,8 @@ public class MainActivity extends AppCompatActivity {
         signupButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(MainActivity.this, SignupActivity.class);
-                MainActivity.this.startActivity(i);
+                Intent i = new Intent(LoginActivity.this, SignupActivity.class);
+                LoginActivity.this.startActivity(i);
             }
         });
 
@@ -85,7 +81,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 signinButton.setEnabled(false);
                 signupButton.setEnabled(false);
-                login(email, password, context);
+                login(email, password);
             }
         });
 
@@ -120,7 +116,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    public void login(final String email, final String password, final Context context) {
+    public void login(final String email, final String password) {
         Thread thread = new Thread(new Runnable() {
             @Override
             public void run() {
@@ -130,8 +126,8 @@ public class MainActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Intent i = new Intent(MainActivity.this, TrendsActivity.class);
-                            MainActivity.this.startActivity(i);
+                            Intent i = new Intent(LoginActivity.this, TrendsActivity.class);
+                            LoginActivity.this.startActivity(i);
                             finish();
                         }
                     });

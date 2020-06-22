@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.Api;
-import com.cointrendnotifier.android.ui.login.MainActivity;
+import com.cointrendnotifier.android.ui.login.LoginActivity;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
 
 public class StartScreenActivity extends AppCompatActivity {
@@ -26,7 +26,7 @@ public class StartScreenActivity extends AppCompatActivity {
                         if (Api.isLoggedIn()) {
                             intent = new Intent(StartScreenActivity.this, TrendsActivity.class);
                         } else {
-                            intent = new Intent(StartScreenActivity.this, MainActivity.class);
+                            intent = new Intent(StartScreenActivity.this, LoginActivity.class);
                         }
                         startActivity(intent);
                         finish();

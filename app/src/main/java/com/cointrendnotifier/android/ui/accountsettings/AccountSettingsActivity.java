@@ -17,7 +17,7 @@ import com.cointrendnotifier.android.api.UnsuccessfulHttpRequestException;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.api.dtos.RegisteredUserDto;
 import com.cointrendnotifier.android.ui.about.AboutActivity;
-import com.cointrendnotifier.android.ui.login.MainActivity;
+import com.cointrendnotifier.android.ui.login.LoginActivity;
 import com.cointrendnotifier.android.ui.password.PasswordActivity;
 import com.cointrendnotifier.android.ui.preferences.PreferencesActivity;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
@@ -51,7 +51,7 @@ public class AccountSettingsActivity extends AppCompatActivity {
                 return true;
             case R.id.logout_from_menu:
                 Users.logout();
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 return true;
             default:

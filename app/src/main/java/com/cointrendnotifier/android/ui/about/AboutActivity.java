@@ -13,7 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.cointrendnotifier.android.R;
 import com.cointrendnotifier.android.api.Users;
 import com.cointrendnotifier.android.ui.accountsettings.AccountSettingsActivity;
-import com.cointrendnotifier.android.ui.login.MainActivity;
+import com.cointrendnotifier.android.ui.login.LoginActivity;
 import com.cointrendnotifier.android.ui.preferences.PreferencesActivity;
 import com.cointrendnotifier.android.ui.trends.TrendsActivity;
 
@@ -40,7 +40,7 @@ public class AboutActivity extends AppCompatActivity {
                 return true;
             case R.id.logout_from_menu:
                 Users.logout();
-                startActivity(new Intent(this, MainActivity.class));
+                startActivity(new Intent(this, LoginActivity.class));
                 finish();
                 return true;
             default:

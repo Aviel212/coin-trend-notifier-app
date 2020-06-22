@@ -25,7 +25,7 @@
     <string name="change_password1">Change Password</string>
     <string name="_0">0</string>
     <string name="forward_slash">/</string>
-    <string name="alert_limit">Alert Limit</string>
+    <string name="signup_alertLimit_hint">Max notifications per hour</string>
     <string name="username">Username</string>
     <string name="email">Email</string>
     <string name="reset">Reset</string>
@@ -40,6 +40,9 @@
     <string name="trends">Trends</string>
     <string name="logout">Logout</string>
     <string name="about_menu">About</string>
+    <string name="signup_cancel_text">cancel</string>
+    <string name="signup_username_hint">Username</string>
+    <string name="singup_label_text">Signup</string>
     <string-array name="coins_array">
         <item>BTC</item>
         <item>ETH</item>
