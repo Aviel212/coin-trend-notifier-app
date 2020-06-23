@@ -39,4 +39,6 @@ dependencies {
 
     implementation group: 'com.squareup.okhttp3', name: 'okhttp', version: '4.5.0'
     implementation group: 'com.beardedhen', name: 'androidbootstrap', version: '2.3.2'
+    implementation 'androidx.cardview:cardview:1.0.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 }

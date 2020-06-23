@@ -43,6 +43,7 @@
     <string name="signup_cancel_text">cancel</string>
     <string name="signup_username_hint">Username</string>
     <string name="singup_label_text">Signup</string>
+    <string name="Trends_header_text">Trends</string>
     <string-array name="coins_array">
         <item>BTC</item>
         <item>ETH</item>
