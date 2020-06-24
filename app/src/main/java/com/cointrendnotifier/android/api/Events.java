@@ -19,13 +19,47 @@ public class Events {
     private static final String baseUrl = Api.URL + "/events";
 
     @NotNull
-    public static List<EventDto> getPreferences() throws IOException, JSONException {
+    public static List<EventDto> getEvents() throws IOException, JSONException {
         // create client
         OkHttpClient client = new OkHttpClient();
 
         // execute request
         Request request = new Request.Builder()
                 .url(baseUrl)
+                .addHeader("Authorization", "Bearer " + Api.getJwt())
+                .get()
+                .build();
+        Response response = client.newCall(request).execute();
+
+        // make sure the response is successful
+        if (!response.isSuccessful()) throw new UnsuccessfulHttpRequestException(response);
+
+        // parse response
+        JSONArray responseBody = new JSONArray(response.body().string());
+        List<EventDto> events = new ArrayList<>(responseBody.length());
+        for (int i = 0; i < responseBody.length(); i++) {
+            // build dto
+            JSONObject current = responseBody.getJSONObject(i);
+            events.add(new EventDto(
+                    current.getString("baseAssetName"),
+                    current.getString("quoteAssetName"),
+                    current.getDouble("probability"),
+                    current.getLong("firedAt"),
+                    current.getString("_id")));
+        }
+
+        // return result
+        return events;
+    }
+
+    @NotNull
+    public static List<EventDto> getEvents(int amount) throws IOException, JSONException {
+        // create client
+        OkHttpClient client = new OkHttpClient();
+
+        // execute request
+        Request request = new Request.Builder()
+                .url(baseUrl + "?amount=" + amount)
                 .addHeader("Authorization", "Bearer " + Api.getJwt())
                 .get()
                 .build();
