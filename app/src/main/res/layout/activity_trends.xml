@@ -93,20 +93,28 @@
         <TableLayout
             android:id="@+id/trends_table_body"
             android:layout_width="match_parent"
-            android:layout_height="400dp"
+            android:layout_height="wrap_content"
             android:background="@drawable/border">
 
             <TableRow android:weightSum="100">
 
-                <TextView
+
+                <LinearLayout
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
+                    android:layout_height="match_parent"
                     android:layout_weight="5"
                     android:background="@drawable/border"
-                    android:text="5"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/bootstrap_h4_text_size" />
+                    android:orientation="horizontal">
+
+                    <com.beardedhen.androidbootstrap.AwesomeTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="5"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/bootstrap_h4_text_size" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"
@@ -124,26 +132,41 @@
                         app:fontAwesomeIcon="fa_arrow_up" />
                 </LinearLayout>
 
-                <TextView
+
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
                     android:layout_weight="25"
                     android:background="@drawable/border"
-                    android:text="BTC/USDT"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/bootstrap_h4_text_size" />
+                    android:orientation="horizontal">
+
+                    <com.beardedhen.androidbootstrap.AwesomeTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="BTC/USDT"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/bootstrap_h4_text_size" />
+                </LinearLayout>
 
 
-                <TextView
+                <LinearLayout
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
                     android:layout_weight="26"
                     android:background="@drawable/border"
-                    android:text="22%"
-                    android:textAlignment="center"
-                    android:textSize="@dimen/bootstrap_h4_text_size" />
+                    android:orientation="horizontal">
+
+                    <com.beardedhen.androidbootstrap.AwesomeTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_horizontal"
+                        android:text="22%"
+                        android:textAlignment="center"
+                        android:textSize="@dimen/bootstrap_h4_text_size" />
+                </LinearLayout>
+
 
                 <LinearLayout
                     android:layout_width="0dp"

@@ -1,6 +1,7 @@
 package com.cointrendnotifier.android.ui.trends;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -13,6 +14,7 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.beardedhen.androidbootstrap.AwesomeTextView;
@@ -72,10 +74,12 @@ public class TrendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trends);
 
+        /*
         final TableLayout trendsTableBody = (TableLayout) findViewById(R.id.trends_table_body);
 
         BootstrapButton moreButton = new BootstrapButton(this);
-        LinearLayout.LayoutParams moreButton_lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
+        TableRow.LayoutParams moreButton_lp = new TableRow.LayoutParams(
+                LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
         moreButton.setLayoutParams(moreButton_lp);
         moreButton.setBootstrapBrand(DefaultBootstrapBrand.PRIMARY);
         moreButton.setBootstrapSize(DefaultBootstrapSize.SM);
@@ -98,47 +102,8 @@ public class TrendsActivity extends AppCompatActivity {
         eventView.setWeightSum(100);
 
         eventView.addView(moreButton);
-        trendsTableBody.addView(eventView);
+        trendsTableBody.addView(eventView);*/
 
-/*
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    final List<EventDto> eventDtos = Events.getEvents(1);
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            trendsTableBody.addView(createStaticEvent(eventDtos.get(0)));
-
-                            BootstrapButton moreButton = new BootstrapButton(TrendsActivity.this);
-                            LinearLayout.LayoutParams moreButton_lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT);
-                            moreButton.setLayoutParams(moreButton_lp);
-                            moreButton.setBootstrapBrand(DefaultBootstrapBrand.PRIMARY);
-                            moreButton.setBootstrapSize(DefaultBootstrapSize.SM);
-                            moreButton.setButtonMode(ButtonMode.REGULAR);
-                            moreButton.setRounded(true);
-                            moreButton.setShowOutline(false);
-                            moreButton.setText("More");
-                            moreButton.setOnClickListener(new View.OnClickListener() {
-                                @Override
-                                public void onClick(View v) {
-                                    Intent intent = new Intent(TrendsActivity.this, TrendActivity.class);
-                                    intent.putExtra("id", "5e9b4f6a48cdb0002ab99f78"); // TODO - needs to be dynamically
-                                    TrendsActivity.this.startActivity(intent);
-                                }
-                            });
-
-                            trendsTableBody.addView(moreButton);
-                        }
-                    });
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();*/
     }
 
     @Override
@@ -147,65 +112,109 @@ public class TrendsActivity extends AppCompatActivity {
         render();
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     private TableRow createStaticEvent(final EventDto event) {
-        // create LayoutParams for image and button's Linear Layouts (elements goes from 0 to 4)
-        LinearLayout.LayoutParams wrapContent1 = new LinearLayout.LayoutParams(0,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        wrapContent1.weight = 30f;
-
-        LinearLayout.LayoutParams wrapContent4 = new LinearLayout.LayoutParams(0,
-                LinearLayout.LayoutParams.MATCH_PARENT);
-        wrapContent4.weight = 14f;
-
-        // container
+        // Row container
         TableRow eventView = new TableRow(TrendsActivity.this);
-        eventView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT));
+        eventView.setLayoutParams(new TableLayout.LayoutParams(
+                TableLayout.LayoutParams.MATCH_PARENT,
+                TableLayout.LayoutParams.WRAP_CONTENT));
         eventView.setWeightSum(100);
 
+        // RowIndex container
+        LinearLayout rowIndexContainer = new LinearLayout(TrendsActivity.this);
+        TableRow.LayoutParams rowIndexContainer_lp = new TableRow.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        rowIndexContainer_lp.weight = 5;
+        rowIndexContainer.setLayoutParams(rowIndexContainer_lp);
+        rowIndexContainer.setBackgroundResource(R.drawable.border);
+
         // Row Index
-        TextView rowIndex = new TextView(TrendsActivity.this);
-        LinearLayout.LayoutParams rowIndex_lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 5);
+        AwesomeTextView rowIndex = new AwesomeTextView(TrendsActivity.this);
+        LinearLayout.LayoutParams rowIndex_lp = new LinearLayout.LayoutParams(
+                TableRow.LayoutParams.MATCH_PARENT, 85);
         rowIndex.setLayoutParams(rowIndex_lp);
         rowIndex.setGravity(Gravity.CENTER_HORIZONTAL);
-        rowIndex.setBackgroundResource(R.drawable.border);
-        rowIndex.setText("1"); // TODO - needs to be dynamically
+        rowIndex.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        rowIndex.setMarkdownText("1"); // TODO - needs to be dynamically
         rowIndex.setTextSize(R.dimen.bootstrap_h4_text_size);
+        rowIndex.setMinWidth(70);
+        rowIndex.setMaxHeight(100);
 
-        // arrow (in LinearLayout - LayoutParams1)
+        rowIndexContainer.addView(rowIndex);
+
+        // ExpectedTo container
+        LinearLayout expectedToContainer = new LinearLayout(TrendsActivity.this);
+        TableRow.LayoutParams wrapContent1 = new TableRow.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        wrapContent1.weight = 30f;
+        expectedToContainer.setLayoutParams(wrapContent1);
+
+        // ExpectedTo
         AwesomeTextView expectedTo = new AwesomeTextView(TrendsActivity.this);
-        LinearLayout.LayoutParams expectedTo_lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams expectedTo_lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 85);
         expectedTo.setLayoutParams(expectedTo_lp);
         expectedTo.setRotation(45f); // TODO - needs to be dynamically
         expectedTo.setText("");
         expectedTo.setBootstrapBrand(DefaultBootstrapBrand.SUCCESS);
         expectedTo.setFontAwesomeIcon(FontAwesome.FA_ARROW_UP);
-
-        LinearLayout expectedToContainer = new LinearLayout(TrendsActivity.this);
-        expectedToContainer.setLayoutParams(wrapContent1);
+        expectedTo.setMinWidth(423);
         expectedToContainer.addView(expectedTo);
 
-        // asset
-        TextView asset = new TextView(TrendsActivity.this);
-        LinearLayout.LayoutParams asset_lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 25f);
+        // Asset container
+        LinearLayout assetContainer = new LinearLayout(TrendsActivity.this);
+        TableRow.LayoutParams assetContainer_lp = new TableRow.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        assetContainer_lp.weight = 25;
+        assetContainer.setLayoutParams(assetContainer_lp);
+        assetContainer.setBackgroundResource(R.drawable.border);
+
+        // Asset
+        AwesomeTextView asset = new AwesomeTextView(TrendsActivity.this);
+        LinearLayout.LayoutParams asset_lp = new TableRow.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 85);
         asset.setLayoutParams(asset_lp);
-        asset.setBackgroundResource(R.drawable.border);
         asset.setText("BTC/USDT"); // TODO - needs to be dynamically
         asset.setTextSize(R.dimen.bootstrap_h4_text_size);
         asset.setGravity(Gravity.CENTER_HORIZONTAL);
+        asset.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
+        assetContainer.addView(asset);
+
+        // probability container
+        LinearLayout probabilityContainer = new LinearLayout(TrendsActivity.this);
+        TableRow.LayoutParams probabilityContainer_lp = new TableRow.LayoutParams(
+                0, LinearLayout.LayoutParams.WRAP_CONTENT);
+        assetContainer_lp.weight = 26;
+        assetContainer.setLayoutParams(assetContainer_lp);
+        assetContainer.setBackgroundResource(R.drawable.border);
 
         // probability
         TextView probability = new TextView(TrendsActivity.this);
-        LinearLayout.LayoutParams probability_lp = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT, 26f);
+        LinearLayout.LayoutParams probability_lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 85);
         probability.setLayoutParams(probability_lp);
-        probability.setBackgroundResource(R.drawable.border);
         probability.setText("10%"); // TODO - needs to be dynamically
         probability.setTextSize(R.dimen.bootstrap_h4_text_size);
         probability.setGravity(Gravity.CENTER_HORIZONTAL);
+        probability.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+        probability.setMinWidth(367);
 
+        probabilityContainer.addView(probability);
+
+        // moreButton container
+        LinearLayout moreButtonContainer = new LinearLayout(TrendsActivity.this);
+        TableRow.LayoutParams wrapContent4 = new TableRow.LayoutParams(
+                0, TableRow.LayoutParams.WRAP_CONTENT);
+        moreButtonContainer.setLayoutParams(wrapContent4);
+        wrapContent4.weight = 14f;
         // moreButton
+
+
         BootstrapButton moreButton = new BootstrapButton(TrendsActivity.this);
-        LinearLayout.LayoutParams moreButton_lp = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
+        LinearLayout.LayoutParams moreButton_lp = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, 85);
         moreButton.setLayoutParams(moreButton_lp);
         moreButton.setBootstrapBrand(DefaultBootstrapBrand.PRIMARY);
         moreButton.setBootstrapSize(DefaultBootstrapSize.SM);
@@ -222,14 +231,12 @@ public class TrendsActivity extends AppCompatActivity {
             }
         });
 
-        LinearLayout moreButtonContainer = new LinearLayout(TrendsActivity.this);
-        moreButtonContainer.setLayoutParams(wrapContent4);
         moreButtonContainer.addView(moreButton);
 
-        eventView.addView(rowIndex);
+        eventView.addView(rowIndexContainer);
         eventView.addView(expectedToContainer);
-        eventView.addView(asset);
-        eventView.addView(probability);
+        eventView.addView(assetContainer);
+        eventView.addView(probabilityContainer);
         eventView.addView(moreButtonContainer);
 
         return eventView;
@@ -241,7 +248,7 @@ public class TrendsActivity extends AppCompatActivity {
             @Override
             public void run() {
                 try {
-                    final List<EventDto> eventsDtos = Events.getEvents(1);
+                    final List<EventDto> eventsDtos = Events.getEvents(15);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
