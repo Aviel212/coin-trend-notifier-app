@@ -14,7 +14,7 @@
         android:text="@string/Trends_header_text"
         app:bootstrapHeading="h1" />
 
-    <TableLayout
+    <LinearLayout
         android:id="@+id/trends_table"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -22,11 +22,14 @@
         android:layout_marginLeft="5dp"
         android:layout_marginTop="15dp"
         android:layout_marginRight="5dp"
-        android:stretchColumns="1">
+        android:orientation="vertical">
 
         <!--Table Header Row-->
-        <TableRow
+        <LinearLayout
             android:id="@+id/trends_table_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
             android:weightSum="100">
 
             <TextView
@@ -34,21 +37,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="5"
+                android:layout_weight="10"
                 android:background="@drawable/border"
                 android:text="#"
                 android:textAlignment="center"
                 android:textSize="@dimen/bootstrap_h4_text_size" />
-
 
             <TextView
                 android:id="@+id/trends_table_header_expectedTo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_weight="30"
+                android:layout_weight="25"
                 android:background="@drawable/border"
-                android:text="Expected To"
+                android:text="Expected"
                 android:textAlignment="center"
                 android:textSize="@dimen/bootstrap_h4_text_size" />
 
@@ -87,112 +89,18 @@
                 android:text="More"
                 android:textAlignment="center"
                 android:textSize="@dimen/bootstrap_h4_text_size" />
-        </TableRow>
+        </LinearLayout>
 
         <!--Table Body-->
-        <TableLayout
+        <LinearLayout
             android:id="@+id/trends_table_body"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border">
-
-            <TableRow android:weightSum="100">
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="5"
-                    android:background="@drawable/border"
-                    android:orientation="horizontal">
-
-                    <com.beardedhen.androidbootstrap.AwesomeTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:text="5"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/bootstrap_h4_text_size" />
-                </LinearLayout>
+            android:background="@drawable/border"
+            android:orientation="vertical">
 
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="30"
-                    android:background="@drawable/border"
-                    android:orientation="horizontal">
+        </LinearLayout>
 
-                    <com.beardedhen.androidbootstrap.AwesomeTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:rotation="135"
-                        android:text=""
-                        app:bootstrapBrand="danger"
-                        app:fontAwesomeIcon="fa_arrow_up" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="25"
-                    android:background="@drawable/border"
-                    android:orientation="horizontal">
-
-                    <com.beardedhen.androidbootstrap.AwesomeTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:text="BTC/USDT"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/bootstrap_h4_text_size" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_weight="26"
-                    android:background="@drawable/border"
-                    android:orientation="horizontal">
-
-                    <com.beardedhen.androidbootstrap.AwesomeTextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_horizontal"
-                        android:text="22%"
-                        android:textAlignment="center"
-                        android:textSize="@dimen/bootstrap_h4_text_size" />
-                </LinearLayout>
-
-
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="14"
-                    android:background="@drawable/border"
-                    android:orientation="horizontal">
-
-                    <com.beardedhen.androidbootstrap.BootstrapButton
-
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:text="More"
-                        app:bootstrapBrand="primary"
-                        app:bootstrapSize="sm"
-                        app:buttonMode="regular"
-                        app:roundedCorners="true"
-                        app:showOutline="false" />
-                </LinearLayout>
-
-            </TableRow>
-
-        </TableLayout>
-
-
-    </TableLayout>
-
-
+    </LinearLayout>
 </RelativeLayout>
