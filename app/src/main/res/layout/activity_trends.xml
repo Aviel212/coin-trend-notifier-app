@@ -24,6 +24,7 @@
         android:layout_marginRight="5dp"
         android:orientation="vertical">
 
+
         <!--Table Header Row-->
         <LinearLayout
             android:id="@+id/trends_table_header"
@@ -101,6 +102,13 @@
 
 
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/logo_animation"
+            android:layout_width="385dp"
+            android:layout_height="182dp"
+            android:layout_marginTop="260dp"
+            app:srcCompat="@drawable/logo" />
 
     </LinearLayout>
 </RelativeLayout>

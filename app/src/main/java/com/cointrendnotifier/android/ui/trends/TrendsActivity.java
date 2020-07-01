@@ -10,6 +10,9 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.RotateAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.RequiresApi;
@@ -70,7 +73,12 @@ public class TrendsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_trends);
 
-
+        ImageView logo = (ImageView) findViewById(R.id.logo_animation);
+        RotateAnimation rotateAnimation = new RotateAnimation(0, 360,
+                Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+        rotateAnimation.setDuration(500);
+        rotateAnimation.setRepeatCount(Animation.INFINITE);
+        logo.startAnimation(rotateAnimation);
     }
 
     @Override
@@ -108,7 +116,7 @@ public class TrendsActivity extends AppCompatActivity {
         rowIndex.setGravity(Gravity.CENTER_HORIZONTAL);
         rowIndex.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         rowIndex.setLayoutParams(rowIndex_lp);
-        rowIndex.setText(i + ""); // TODO - needs to be dynamically
+        rowIndex.setText(i + "");
         rowIndex.setTextSize(R.dimen.bootstrap_h4_text_size);
         rowIndex.setBootstrapBrand(event.getProbability() > 0 ?
                 DefaultBootstrapBrand.SUCCESS :
@@ -201,6 +209,7 @@ public class TrendsActivity extends AppCompatActivity {
 
     private void render() {
         final LinearLayout trendsTableBody = (LinearLayout) findViewById(R.id.trends_table_body);
+        displayAnimation();
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -210,6 +219,7 @@ public class TrendsActivity extends AppCompatActivity {
                         @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
                         @Override
                         public void run() {
+                            hideAnimation();
                             trendsTableBody.removeAllViews();
                             int i = 0;
                             for (EventDto event : eventsDtos) {
@@ -229,5 +239,13 @@ public class TrendsActivity extends AppCompatActivity {
         }).start();
     }
 
+    private void displayAnimation() {
+        ImageView logo = (ImageView) findViewById(R.id.logo_animation);
+        logo.setVisibility(View.VISIBLE);
+    }
 
+    private void hideAnimation() {
+        ImageView logo = (ImageView) findViewById(R.id.logo_animation);
+        logo.setVisibility(View.INVISIBLE);
+    }
 }
